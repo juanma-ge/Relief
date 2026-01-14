@@ -26,16 +26,24 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.navigation.NavHostController
+import com.alberti.relief.data.Rol
+import com.alberti.relief.data.Usuario
 
 @Composable
-fun PantallaLogin(){
+fun PantallaLogin(navController: NavHostController){
 
     var correo by remember { mutableStateOf("") }
-    var contraseña by remember { mutableStateOf("") }
+    var contrasenia by remember { mutableStateOf("") }
     var codigo by remember { mutableStateOf("") }
-
+    var mensajeError by remember { mutableStateOf("") }
     val context = LocalContext.current
     val codigoAdmin = "Admin1314"
+
+    val usuarioCreado: (Usuario) -> Unit = { usuario ->
+        navController.navigate("")
+    }
 
     Column(
         modifier = Modifier
@@ -53,17 +61,18 @@ fun PantallaLogin(){
         OutlinedTextField(
             value = correo,
             onValueChange = { correo = it },
-            label = { Text("Usuario o correo") },
+            label = { Text("Correo") },
             modifier = Modifier.fillMaxWidth(0.9f)
         )
 
         Spacer(modifier = Modifier.height(10.dp))
 
         OutlinedTextField(
-            value = contraseña,
-            onValueChange = { contraseña = it },
+            value = contrasenia,
+            onValueChange = { contrasenia = it },
             label = { Text("Contraseña") },
-            modifier = Modifier.fillMaxWidth(0.9f)
+            modifier = Modifier.fillMaxWidth(0.9f),
+            visualTransformation = PasswordVisualTransformation()
         )
 
         Spacer(modifier = Modifier.height(5.dp))
@@ -75,14 +84,24 @@ fun PantallaLogin(){
             modifier = Modifier.fillMaxWidth(0.7f)
         )
 
+        if (mensajeError.isNotEmpty()) {
+            Text(mensajeError, color = Color.Red, modifier = Modifier.padding(vertical = 8.dp))
+        }
+
         Spacer(modifier = Modifier.height(25.dp))
 
         Button(
-            onClick =
+            onClick = {
+                if (correo.contains("@") && contrasenia.length >= 4) {
+                    val rolAsignado = if (codigo == "Admin1314") Rol.ADMIN else Rol.USUARIO
+                    usuarioCreado(Usuario(correo, rolAsignado, contrasenia))
+                } else {
+                    mensajeError = "Email inválido o contraseña corta"
+                }
+            },
+            modifier = Modifier.fillMaxWidth().height(55.dp)
         ) {
-
-
-
+            Text("Iniciar sesión")
         }
 
     }
