@@ -1,6 +1,6 @@
 package com.alberti.relief.data
 
-data class Hospital_Urgencias(
+data class CentrosUrgencias(
     val nombre: String,
     val direccion: String,
     val distancia: String

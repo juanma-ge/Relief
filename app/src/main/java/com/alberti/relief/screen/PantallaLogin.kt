@@ -38,8 +38,6 @@ fun PantallaLogin(navController: NavHostController){
     var contrasenia by remember { mutableStateOf("") }
     var codigo by remember { mutableStateOf("") }
     var mensajeError by remember { mutableStateOf("") }
-    val context = LocalContext.current
-    val codigoAdmin = "Admin1314"
 
     val usuarioCreado: (Usuario) -> Unit = { usuario ->
         navController.navigate("")
