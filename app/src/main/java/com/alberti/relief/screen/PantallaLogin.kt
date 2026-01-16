@@ -32,16 +32,12 @@ import com.alberti.relief.data.Rol
 import com.alberti.relief.data.Usuario
 
 @Composable
-fun PantallaLogin(navController: NavHostController){
+fun PantallaLogin(navController: NavHostController, usuarioCreado: (Usuario) -> Unit){
 
     var correo by remember { mutableStateOf("") }
     var contrasenia by remember { mutableStateOf("") }
     var codigo by remember { mutableStateOf("") }
     var mensajeError by remember { mutableStateOf("") }
-
-    val usuarioCreado: (Usuario) -> Unit = { usuario ->
-        navController.navigate("")
-    }
 
     Column(
         modifier = Modifier

@@ -79,7 +79,7 @@ fun PantallaPrincipal(navController: NavHostController, rol: Rol) {
                 title = { Text("Relief") },
                 actions = {
                     if(rol == Rol.ADMIN) {
-                        IconButton(onClick = { navController.navigate("")}) {
+                        IconButton(onClick = { navController.navigate("PantallaAdmin")}) {
                             Icon(Icons.Default.BarChart, contentDescription = "Admin", tint = Color.Red)
                         }
                     }
@@ -87,7 +87,7 @@ fun PantallaPrincipal(navController: NavHostController, rol: Rol) {
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { navController.navigate("")}) {
+            FloatingActionButton(onClick = { navController.navigate("PantallaEmergencia")}) {
                 Icon(Icons.Default.Emergency, contentDescription = "SOS", tint = Color.White)
             }
         }
