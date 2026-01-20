@@ -1,4 +1,4 @@
-package com.alberti.relief.screen
+package com.alberti.relief.Navigation
 
 import android.app.Activity
 import android.content.Intent
@@ -64,23 +64,48 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.alberti.relief.data.Stats
-
+import com.alberti.relief.screen.PantallaAdmin
+import com.alberti.relief.screen.PantallaEmergencia
+import com.alberti.relief.screen.PantallaLogin
+import com.alberti.relief.screen.PantallaPrincipal
 
 @Composable
-fun PantallaAdmin(navController: NavHostController) {
-    val stats = listOf(Stats("Lun", 20), Stats("Mar", 45), Stats("Mie", 30), Stats("Jue", 60), Stats("Vie", 85))
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        IconButton(onClick = { navController.popBackStack() }) { Icon(Icons.Default.ArrowBack, null) }
-        Text("Reporte de Uso (Admin)", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.height(40.dp))
-        Row(Modifier.fillMaxWidth().height(200.dp), horizontalArrangement = Arrangement.SpaceEvenly, verticalAlignment = Alignment.Bottom) {
-            stats.forEach { stat ->
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Box(Modifier.width(35.dp).height((stat.num * 2).dp).background(Color.Red, RoundedCornerShape(4.dp)))
-                    Text(stat.mes)
+fun AppNavigation(){
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = "Login") {
+
+        composable("Login") {
+            PantallaLogin(
+                navController = navController,
+                usuarioCreado = { usuario ->
+                    navController.navigate("Principal/${usuario.rol.name}")
                 }
-            }
+            )
+        }
+
+        composable(
+            route = "Principal/{rol}",
+            arguments = listOf(navArgument("rol") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val rolStr = backStackEntry.arguments?.getString("rol") ?: "USUARIO"
+            val rolActual = if (rolStr == "ADMIN") Rol.ADMIN else Rol.USUARIO
+            PantallaPrincipal(navController, rolActual)
+        }
+
+        composable("PantallaAdmin") {
+            PantallaAdmin(navController)
+        }
+
+        composable("PantallaEmergencia") {
+            PantallaEmergencia(navController)
         }
     }
+
 }
