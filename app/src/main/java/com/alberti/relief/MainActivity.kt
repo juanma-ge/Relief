@@ -4,23 +4,18 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.Composable
-import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.alberti.relief.Navigation.AppNavigation
-import com.alberti.relief.data.Rol
-import com.alberti.relief.screen.PantallaAdmin
-import com.alberti.relief.screen.PantallaEmergencia
-import com.alberti.relief.screen.PantallaLogin
-import com.alberti.relief.screen.PantallaPrincipal
-
+import com.google.android.libraries.places.api.Places
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (!Places.isInitialized()) {
+            // El plugin lee MAPS_API_KEY del local.properties y lo pone aquí
+            Places.initialize(applicationContext, BuildConfig.MAPS_API_KEY)
+        }
+
         enableEdgeToEdge()
         setContent {
             AppNavigation()

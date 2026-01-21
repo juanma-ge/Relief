@@ -3,6 +3,7 @@ package com.alberti.relief.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.HealthAndSafety
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -33,56 +35,39 @@ import com.alberti.relief.data.Usuario
 
 @Composable
 fun PantallaLogin(navController: NavHostController, usuarioCreado: (Usuario) -> Unit){
-
     var correo by remember { mutableStateOf("") }
     var contrasenia by remember { mutableStateOf("") }
     var codigo by remember { mutableStateOf("") }
     var mensajeError by remember { mutableStateOf("") }
 
     Column(
-        modifier = Modifier
-            .padding(),
+        modifier = Modifier.fillMaxSize().padding(24.dp), // fillMaxSize añadido
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-
         Icon(Icons.Default.HealthAndSafety, contentDescription = null, modifier = Modifier.size(100.dp), tint = Color.Red)
-        Text("RELIEF", fontSize = 32.sp, fontWeight = FontWeight.Black, color = Color.Red)
-        Text("Tu red de emergencia", fontSize = 14.sp, color = Color.Gray)
+        Text("RELIEF", fontSize = 36.sp, fontWeight = FontWeight.Black, color = Color.Red)
+        Text("Tu red de emergencia", fontSize = 16.sp, color = Color.Gray)
 
-        Spacer(modifier = Modifier.height(50.dp))
+        Spacer(modifier = Modifier.height(40.dp))
 
-        OutlinedTextField(
-            value = correo,
-            onValueChange = { correo = it },
-            label = { Text("Correo") },
-            modifier = Modifier.fillMaxWidth(0.9f)
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
-
+        OutlinedTextField(value = correo, onValueChange = { correo = it }, label = { Text("Correo electrónico") }, modifier = Modifier.fillMaxWidth())
+        Spacer(modifier = Modifier.height(12.dp))
         OutlinedTextField(
             value = contrasenia,
             onValueChange = { contrasenia = it },
             label = { Text("Contraseña") },
-            modifier = Modifier.fillMaxWidth(0.9f),
+            modifier = Modifier.fillMaxWidth(),
             visualTransformation = PasswordVisualTransformation()
         )
-
-        Spacer(modifier = Modifier.height(5.dp))
-
-        OutlinedTextField(
-            value = codigo,
-            onValueChange = { codigo = it },
-            label = { Text("Código de administradores (Opcional)")},
-            modifier = Modifier.fillMaxWidth(0.7f)
-        )
+        Spacer(modifier = Modifier.height(12.dp))
+        OutlinedTextField(value = codigo, onValueChange = { codigo = it }, label = { Text("Código Admin (Opcional)") }, modifier = Modifier.fillMaxWidth())
 
         if (mensajeError.isNotEmpty()) {
-            Text(mensajeError, color = Color.Red, modifier = Modifier.padding(vertical = 8.dp))
+            Text(mensajeError, color = Color.Red, modifier = Modifier.padding(top = 8.dp))
         }
 
-        Spacer(modifier = Modifier.height(25.dp))
+        Spacer(modifier = Modifier.height(32.dp))
 
         Button(
             onClick = {
@@ -90,15 +75,13 @@ fun PantallaLogin(navController: NavHostController, usuarioCreado: (Usuario) -> 
                     val rolAsignado = if (codigo == "Admin1314") Rol.ADMIN else Rol.USUARIO
                     usuarioCreado(Usuario(correo, rolAsignado, contrasenia))
                 } else {
-                    mensajeError = "Email inválido o contraseña corta"
+                    mensajeError = "Datos incorrectos"
                 }
             },
-            modifier = Modifier.fillMaxWidth().height(55.dp)
+            modifier = Modifier.fillMaxWidth().height(56.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
         ) {
-            Text("Iniciar sesión")
+            Text("ENTRAR", fontWeight = FontWeight.Bold)
         }
-
     }
-
-
 }
