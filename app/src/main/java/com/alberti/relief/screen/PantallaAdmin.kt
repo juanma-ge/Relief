@@ -83,7 +83,6 @@ fun PantallaAdmin(navController: NavHostController) {
     var listaAccesos by remember { mutableStateOf(listOf<AccesoEntity>()) }
     var filtroActual by remember { mutableStateOf("TODOS") }
 
-    // Cada vez que el filtro cambie, pedimos datos a Room
     LaunchedEffect(filtroActual) {
         listaAccesos = if (filtroActual == "TODOS") {
             db.accesoDao().obtenerTodos()
@@ -96,7 +95,6 @@ fun PantallaAdmin(navController: NavHostController) {
         IconButton(onClick = { navController.popBackStack() }) { Icon(Icons.Default.ArrowBack, null) }
         Text("Panel de Auditoría", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
 
-        // --- INFORME: Valores calculados (RA5.d) ---
         Card(
             modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
             colors = CardDefaults.cardColors(containerColor = Color.Red.copy(alpha = 0.05f))
@@ -107,7 +105,6 @@ fun PantallaAdmin(navController: NavHostController) {
             }
         }
 
-        // --- FILTROS: (RA5.c) ---
         Text("Filtrar por tipo de usuario:", fontWeight = FontWeight.Bold)
         Row(Modifier.padding(vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             val opciones = listOf("TODOS", "ADMIN", "USUARIO")
@@ -122,7 +119,6 @@ fun PantallaAdmin(navController: NavHostController) {
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        // --- LISTADO DE DATOS PERSISTENTES (RA6) ---
         LazyColumn(Modifier.fillMaxSize()) {
             items(listaAccesos) { acceso ->
                 Card(

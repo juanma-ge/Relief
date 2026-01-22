@@ -51,7 +51,7 @@ fun PantallaLogin(navController: NavHostController, usuarioCreado: (Usuario) -> 
     val db = AppDatabase.getDatabase(context)
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(24.dp), // fillMaxSize añadido
+        modifier = Modifier.fillMaxSize().padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

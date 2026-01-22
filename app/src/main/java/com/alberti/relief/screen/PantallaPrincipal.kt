@@ -93,7 +93,6 @@ fun PantallaPrincipal(navController: NavHostController, rol: Rol) {
         Column(
             modifier = Modifier.padding(padding).padding(16.dp).fillMaxSize()
         ) {
-            // Buscador
             OutlinedTextField(
                 value = textoBuscado,
                 onValueChange = { textoBuscado = it },
