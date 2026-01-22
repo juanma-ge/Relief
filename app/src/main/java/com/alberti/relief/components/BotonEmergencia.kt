@@ -28,11 +28,15 @@ fun BotonEmergencia(text: String, icon: ImageVector, color: Color, numero: Strin
             val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$numero"))
             context.startActivity(intent)
         },
+
         colors = ButtonDefaults.buttonColors(containerColor = color),
         modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp).height(65.dp)
+
     ) {
+
         Icon(icon, null)
         Spacer(Modifier.width(12.dp))
         Text("$text ($numero)", fontWeight = FontWeight.Bold)
+
     }
 }

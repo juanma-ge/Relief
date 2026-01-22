@@ -63,6 +63,7 @@ fun PantallaLogin(navController: NavHostController, usuarioCreado: (Usuario) -> 
 
         OutlinedTextField(value = correo, onValueChange = { correo = it }, label = { Text("Correo electrónico") }, modifier = Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(12.dp))
+
         OutlinedTextField(
             value = contrasenia,
             onValueChange = { contrasenia = it },
@@ -70,6 +71,7 @@ fun PantallaLogin(navController: NavHostController, usuarioCreado: (Usuario) -> 
             modifier = Modifier.fillMaxWidth(),
             visualTransformation = PasswordVisualTransformation()
         )
+
         Spacer(modifier = Modifier.height(12.dp))
         OutlinedTextField(value = codigo, onValueChange = { codigo = it }, label = { Text("Código Admin (Opcional)") }, modifier = Modifier.fillMaxWidth())
 
@@ -99,8 +101,10 @@ fun PantallaLogin(navController: NavHostController, usuarioCreado: (Usuario) -> 
                     mensajeError = "Datos incorrectos"
                 }
             },
+
             modifier = Modifier.fillMaxWidth().height(56.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Red)
+
         ) {
             Text("ENTRAR", fontWeight = FontWeight.Bold)
         }

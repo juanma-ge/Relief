@@ -122,7 +122,9 @@ fun PantallaAdmin(navController: NavHostController) {
         LazyColumn(Modifier.fillMaxSize()) {
             items(listaAccesos) { acceso ->
                 Card(
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
                     border = BorderStroke(1.dp, Color.LightGray.copy(alpha = 0.5f))
                 ) {

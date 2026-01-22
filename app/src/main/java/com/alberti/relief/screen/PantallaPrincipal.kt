@@ -91,14 +91,17 @@ fun PantallaPrincipal(navController: NavHostController, rol: Rol) {
         }
     ) { padding ->
         Column(
-            modifier = Modifier.padding(padding).padding(16.dp).fillMaxSize()
+            modifier = Modifier
+                .padding(padding)
+                .padding(16.dp)
+                .fillMaxSize()
         ) {
             OutlinedTextField(
                 value = textoBuscado,
                 onValueChange = { textoBuscado = it },
                 modifier = Modifier.fillMaxWidth(),
-                label = { Text("Buscar ciudad o dirección") },
-                placeholder = { Text("Ej: Madrid o Calle Mayor") },
+                label = { Text("Buscar sitio") },
+                placeholder = { Text("Busca una ciudad o sitio específico") },
                 trailingIcon = {
                     Row {
                         IconButton(onClick = {
@@ -131,6 +134,7 @@ fun PantallaPrincipal(navController: NavHostController, rol: Rol) {
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
                 shape = RoundedCornerShape(8.dp)
+
             ) {
                 Icon(Icons.Default.GpsFixed, null)
                 Spacer(Modifier.width(8.dp))
@@ -146,8 +150,10 @@ fun PantallaPrincipal(navController: NavHostController, rol: Rol) {
             }
 
             if (centrosDetectados.isNotEmpty()) {
+
                 Text("Resultados encontrados:", fontWeight = FontWeight.Black, fontSize = 18.sp)
                 Spacer(modifier = Modifier.height(8.dp))
+
                 LazyColumn(modifier = Modifier.weight(1f)) {
                     items(centrosDetectados) { centro ->
                         Card(
