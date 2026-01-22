@@ -26,12 +26,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.navigation.NavHostController
 import com.alberti.relief.data.Rol
 import com.alberti.relief.data.Usuario
+import com.alberti.relief.data.local.AccesoEntity
+import com.alberti.relief.data.local.AppDatabase
+import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
 
 @Composable
 fun PantallaLogin(navController: NavHostController, usuarioCreado: (Usuario) -> Unit){
@@ -39,6 +45,10 @@ fun PantallaLogin(navController: NavHostController, usuarioCreado: (Usuario) -> 
     var contrasenia by remember { mutableStateOf("") }
     var codigo by remember { mutableStateOf("") }
     var mensajeError by remember { mutableStateOf("") }
+
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val db = AppDatabase.getDatabase(context)
 
     Column(
         modifier = Modifier.fillMaxSize().padding(24.dp), // fillMaxSize añadido
@@ -73,6 +83,17 @@ fun PantallaLogin(navController: NavHostController, usuarioCreado: (Usuario) -> 
             onClick = {
                 if (correo.contains("@") && contrasenia.length >= 4) {
                     val rolAsignado = if (codigo == "Admin1314") Rol.ADMIN else Rol.USUARIO
+
+                    scope.launch {
+                        db.accesoDao().insertarAcceso(
+                            AccesoEntity(
+                                correo = correo,
+                                rol = rolAsignado.name,
+                                fecha = SimpleDateFormat("dd/MM/yyyy HH:mm").format(Date())
+                            )
+                        )
+                    }
+
                     usuarioCreado(Usuario(correo, rolAsignado, contrasenia))
                 } else {
                     mensajeError = "Datos incorrectos"

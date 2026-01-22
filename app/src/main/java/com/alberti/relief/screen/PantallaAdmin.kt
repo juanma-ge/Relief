@@ -7,6 +7,7 @@ import android.speech.RecognizerIntent
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -63,36 +64,84 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.runtime.LaunchedEffect
 import com.alberti.relief.data.Stats
+import com.alberti.relief.data.local.AccesoEntity
+import com.alberti.relief.data.local.AppDatabase
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PantallaAdmin(navController: NavHostController) {
-    val stats = listOf(Stats("Lun", 20), Stats("Mar", 45), Stats("Mie", 30), Stats("Jue", 60), Stats("Vie", 85))
-    val totalAlertas = stats.sumOf { it.num }
+    val context = LocalContext.current
+    val db = AppDatabase.getDatabase(context)
+
+    var listaAccesos by remember { mutableStateOf(listOf<AccesoEntity>()) }
+    var filtroActual by remember { mutableStateOf("TODOS") }
+
+    // Cada vez que el filtro cambie, pedimos datos a Room
+    LaunchedEffect(filtroActual) {
+        listaAccesos = if (filtroActual == "TODOS") {
+            db.accesoDao().obtenerTodos()
+        } else {
+            db.accesoDao().filtrarPorRol(filtroActual)
+        }
+    }
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         IconButton(onClick = { navController.popBackStack() }) { Icon(Icons.Default.ArrowBack, null) }
-        Text("Panel de Control", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+        Text("Panel de Auditoría", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
 
-        Card(modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp), colors = CardDefaults.cardColors(containerColor = Color.Red.copy(alpha = 0.1f))) {
+        // --- INFORME: Valores calculados (RA5.d) ---
+        Card(
+            modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
+            colors = CardDefaults.cardColors(containerColor = Color.Red.copy(alpha = 0.05f))
+        ) {
             Column(Modifier.padding(16.dp)) {
-                Text("Total de incidencias esta semana", fontSize = 14.sp)
-                Text("$totalAlertas alertas", fontSize = 28.sp, fontWeight = FontWeight.Black, color = Color.Red)
+                Text("Resultados del informe", fontSize = 12.sp)
+                Text("${listaAccesos.size} registros encontrados", fontSize = 24.sp, fontWeight = FontWeight.Black)
             }
         }
 
-        Spacer(modifier = Modifier.height(20.dp))
-        Text("Uso de la red (Alertas por día)", fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.height(20.dp))
+        // --- FILTROS: (RA5.c) ---
+        Text("Filtrar por tipo de usuario:", fontWeight = FontWeight.Bold)
+        Row(Modifier.padding(vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            val opciones = listOf("TODOS", "ADMIN", "USUARIO")
+            opciones.forEach { opcion ->
+                FilterChip(
+                    selected = filtroActual == opcion,
+                    onClick = { filtroActual = opcion },
+                    label = { Text(opcion) }
+                )
+            }
+        }
 
-        Row(Modifier.fillMaxWidth().height(200.dp), horizontalArrangement = Arrangement.SpaceEvenly, verticalAlignment = Alignment.Bottom) {
-            stats.forEach { stat ->
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Box(Modifier.width(35.dp).height((stat.num * 2).dp).background(Color.Red, RoundedCornerShape(4.dp)))
-                    Text(stat.mes, fontSize = 12.sp)
+        Spacer(modifier = Modifier.height(10.dp))
+
+        // --- LISTADO DE DATOS PERSISTENTES (RA6) ---
+        LazyColumn(Modifier.fillMaxSize()) {
+            items(listaAccesos) { acceso ->
+                Card(
+                    modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    border = BorderStroke(1.dp, Color.LightGray.copy(alpha = 0.5f))
+                ) {
+                    ListItem(
+                        headlineContent = { Text(acceso.correo, fontWeight = FontWeight.Bold) },
+                        supportingContent = { Text("Entró el: ${acceso.fecha}") },
+                        trailingContent = {
+                            Text(
+                                acceso.rol,
+                                color = if(acceso.rol == "ADMIN") Color.Red else Color.DarkGray,
+                                fontWeight = FontWeight.Black,
+                                fontSize = 10.sp
+                            )
+                        }
+                    )
                 }
             }
         }

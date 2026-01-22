@@ -12,7 +12,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         if (!Places.isInitialized()) {
-            // El plugin lee MAPS_API_KEY del local.properties y lo pone aquí
             Places.initialize(applicationContext, BuildConfig.MAPS_API_KEY)
         }
 
