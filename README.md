@@ -6,9 +6,9 @@
 
 Para facilitar la revisión y evaluación del proyecto, la documentación la he dividido en:
 
-1.  📘 **[MANUAL DE USUARIO](./MANUAL_USUARIO.md)** *Guía visual sobre cómo utilizar la aplicación, acceder como administrador y realizar búsquedas.*
+1.  **[MANUAL DE USUARIO](./MANUAL_USUARIO.md)** *Guía visual sobre cómo utilizar la aplicación, acceder como administrador y realizar búsquedas.*
 
-2.  ⚙️ **[JUSTIFICACIÓN TÉCNICA DE RAs](./JUSTIFICACION_RAS.md)** *Documento técnico donde se justifica punto por punto el cumplimiento de los Resultados de Aprendizaje (RA1 - RA8) con enlaces directos al código fuente.*
+2.  **[JUSTIFICACIÓN TÉCNICA DE RAs](./JUSTIFICACION_RAS.md)** *Documento técnico donde se justifica punto por punto el cumplimiento de los Resultados de Aprendizaje (RA1 - RA8) con enlaces directos al código fuente.*
 
 ## Tecnologías Utilizadas
 
