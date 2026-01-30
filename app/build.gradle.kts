@@ -85,4 +85,12 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_version")
 
     kapt("androidx.room:room-compiler:$room_version")
+
+    testImplementation(libs.junit)
+
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
