@@ -1,5 +1,7 @@
 package com.alberti.relief.screen
 
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,6 +22,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -64,8 +67,23 @@ fun PantallaAdmin(navController: NavHostController) {
     }
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        IconButton(onClick = { navController.popBackStack() }) { Icon(Icons.Default.ArrowBack, null) }
-        Text("Panel de Auditoría", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                IconButton(onClick = { navController.popBackStack() }) {
+                    Icon(Icons.Default.ArrowBack, null)
+                }
+                Text("Auditoría", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+            }
+
+            IconButton(onClick = { compartirInforme(context, listaAccesos) }) {
+                Icon(Icons.Default.Share, contentDescription = "Exportar Informe")
+            }
+        }
 
         Card(
             modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
@@ -122,6 +140,34 @@ fun PantallaAdmin(navController: NavHostController) {
     }
 }
 
+fun compartirInforme(context: Context, lista: List<AccesoEntity>) {
+    val totalAdmins = lista.count { it.rol == "ADMIN" }
+    val totalUsuarios = lista.count { it.rol == "USUARIO" }
+
+    val sb = StringBuilder()
+    sb.append("INFORME DE AUDITORÍA - RELIEF APP\n")
+    sb.append("====================================\n\n")
+    sb.append("RESUMEN ESTADÍSTICO:\n")
+    sb.append("- Total registros visibles: ${lista.size}\n")
+    sb.append("- Administradores: $totalAdmins\n")
+    sb.append("- Usuarios estándar: $totalUsuarios\n\n")
+    sb.append("DETALLE DE ACCESOS:\n")
+    sb.append("------------------------------------\n")
+
+    lista.forEach { acceso ->
+        sb.append("📅 ${acceso.fecha} | 👤 ${acceso.rol}\n")
+        sb.append("📧 ${acceso.correo}\n")
+        sb.append("------------------------------------\n")
+    }
+
+    val intent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_SUBJECT, "Informe de Accesos Relief")
+        putExtra(Intent.EXTRA_TEXT, sb.toString())
+    }
+    context.startActivity(Intent.createChooser(intent, "Compartir informe vía..."))
+}
+
 @Composable
 fun GraficoBarrasAccesos(accesos: List<AccesoEntity>) {
     val totalAdmins = accesos.count { it.rol == "ADMIN" }
@@ -144,7 +190,6 @@ fun GraficoBarrasAccesos(accesos: List<AccesoEntity>) {
             ) {
                 Text("Estadísticas", fontWeight = FontWeight.Bold, color = Color.Gray)
 
-                // Leyenda compacta
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Box(Modifier.size(10.dp).background(Color.Red, CircleShape))
                     Text(" Admin", fontSize = 10.sp, modifier = Modifier.padding(end = 8.dp))
