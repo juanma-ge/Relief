@@ -22,7 +22,9 @@ Para facilitar la revisión y evaluación del proyecto, la documentación la he 
 
 1.  Clona este repositorio.
 2.  La `API_KEY` está en  el archivo `local.properties`, por lo que no neceitarás añadir nada.
-3.  Descarga la APK que dejaré abajo, ahí se situa la app.
+3.  Descarga la APK mediante el enlace que está a continuación.
+
+[![Descargar APK](https://img.shields.io/badge/Android-Descargar%20APK-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://github.com/juanma-ge/Relief/releases/download/v1.0/Relief.apk)
 
 ---
 *Juan Manuel Gómez Estudillo 2 DAM -- Desarollo de Interfaces*

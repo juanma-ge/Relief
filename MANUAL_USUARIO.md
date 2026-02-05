@@ -13,10 +13,13 @@
 ## 3. Modo SOS (Emergencias)
 Accesible desde el icono de sirena rojo.
 * **Botón de Pánico:** Mantén pulsado el círculo rojo para llamar al 112, número de emergencias.
-* **Accesos Directos:** Botones para Policía (091), Bomberos (080) y Salud (061).
+* **Accesos Directos:** Botones para Policía (091), Bomberos (080) y Salud (061), donde si pulsas alguno de ellos los podrás llamar inmediatamente.
 
 ## 4. Panel de Auditoría (Solo Admin)
-Accesible desde el icono de gráfico 📊.
-* Permite ver el historial de accesos.
-* Usa los filtros para ver solo Admins o Usuarios.
+Accesible desde el icono de gráfico.
+* Permite ver el historial de accesos, incluyendo el nombre, o correo, del usuario, su contraseña y la hora a la que accedió.
+* Usa los filtros para ver solo admins, usuarios o ambos.
 * Visualiza la carga de usuarios mediante gráficos de barras.
+* Al clicar en el botón de compartir de la esquina superior derecha, se enviará un informe escrito.
+
+
