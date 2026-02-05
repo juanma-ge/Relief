@@ -271,9 +271,10 @@ https://github.com/juanma-ge/Relief/blob/c8db87b4494352b7f30df53578c9eec84930eff
 
 ### RA6.d Documenta estructura persistente
 **Justificación:**
-La estructura de la información persistente (Base de Datos) está documentada explícitamente en el código a través de las anotaciones de la librería Room. La clase de datos `AccesoEntity` define claramente el esquema de la tabla, los tipos de datos y las claves primarias, sirviendo como referencia técnica.
+La estructura de la información persistente (Base de Datos) está documentada explícitamente en el código a través de las anotaciones de la librería Room. La clase de datos `AccesoEntity` define claramente el esquema de la tabla, los tipos de datos y las claves primarias, sirviendo como referencia técnica. Además la propia función está documentada para que el usuario entienda su funcionamiento.
 
 https://github.com/juanma-ge/Relief/blob/c8db87b4494352b7f30df53578c9eec84930eff9/app/src/main/java/com/alberti/relief/data/local/AccesoEntity.kt#L8-L11
+https://github.com/juanma-ge/Relief/blob/9c2df39b241d7631797e268de79760cfcf2f17e5/app/src/main/java/com/alberti/relief/data/local/AccesoDao.kt#L7-L12
 
 ### RA6.e Manuales y Tutoriales
 **Justificación:**
@@ -358,4 +359,5 @@ https://github.com/juanma-ge/Relief/blob/ddfdb4215867368f09eb6e6c658b13c4e2f2fa4
 Las pruebas están documentadas mediante el uso de nombres de funciones largos y descriptivos (`escribirUsuarioYLeerlo`, `pruebaDeCargaMasiva`). Esto permite que cualquier desarrollador entienda inmediatamente el objetivo de la prueba y el escenario que se está validando sin necesidad de leer el cuerpo del código.
 
 https://github.com/juanma-ge/Relief/blob/ddfdb4215867368f09eb6e6c658b13c4e2f2fa41/app/src/androidTest/java/com/alberti/relief/AccesoDaoTest.kt#L53
+
 
