@@ -285,58 +285,37 @@ Para cumplir con la entrega de documentación de usuario, se ha elaborado y refe
 
 ### RA7.a Empaquetado
 **Justificación:**
-El proyecto está configurado para generar un artefacto instalable único. En el archivo `build.gradle` se definen el `applicationId` y los códigos de versión, permitiendo al sistema de construcción de Android empaquetar todos los recursos y código compilado en un archivo .apk o .aab coherente.
+El proyecto está configurado para generar un artefacto instalable único. En el archivo `build.gradle` se definen el `applicationId` y los códigos de versión, permitiendo al sistema de construcción de Android empaquetar todos los recursos y código compilado en un archivo .apk como el de a conituación.
 
-
+[![Descargar APK](https://img.shields.io/badge/Android-Descargar%20APK-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://github.com/juanma-ge/Relief/releases/download/v1.0/Relief.apk)
 
 ### RA7.b Personalización instalador
 **Justificación:**
 Se ha personalizado la apariencia de la aplicación para el instalador y el launcher del sistema operativo. En el `AndroidManifest.xml`, se especifican el icono (`android:icon`) y el nombre visible (`android:label`), asegurando que la app sea reconocible y profesional tras la instalación.
 
-*Evidencia (AndroidManifest.xml):*
-[🔗 Código aquí]
-
 ### RA7.c Paquete desde entorno
 **Justificación:**
 La generación del paquete instalable se realiza directamente desde el entorno de desarrollo (IDE) utilizando los plugins de Android Gradle. Esto automatiza el proceso de compilación, linkado de recursos y empaquetado final sin necesidad de herramientas de terceros complejas.
-
-*Evidencia (build.gradle):*
-[🔗 Código aquí]
 
 ### RA7.d Herramientas externas
 **Justificación:**
 La aplicación integra dependencias de herramientas externas esenciales para su funcionamiento, como `play-services-location`. Estas librerías se gestionan a través de Gradle, que las descarga e incluye en el paquete final para asegurar que la geolocalización funcione en el dispositivo del usuario.
 
-*Evidencia (build.gradle):*
-[🔗 Código aquí]
-
 ### RA7.e Firma digital
 **Justificación:**
 El script de construcción está preparado para soportar el firmado digital de la aplicación en modo release. Aunque aquí se muestra la configuración básica, esta estructura permite inyectar las claves del almacén (keystore) para firmar el APK, garantizando su autenticidad e integridad.
 
-*Evidencia (build.gradle):*
-[🔗 Código aquí]
-
 ### RA7.f Instalación desatendida
 **Justificación:**
-Para facilitar el despliegue y funcionamiento sin interrupciones constantes, se declaran explícitamente todos los permisos necesarios (Ubicación, Internet, Audio) en el Manifiesto. Esto permite que el sistema gestione los permisos de forma centralizada, facilitando la administración en entornos controlados.
-
-*Evidencia (AndroidManifest.xml):*
-[🔗 Código aquí]
+Para facilitar el despliegue y funcionamiento sin interrupciones constantes, se declaran explícitamente todos los permisos necesarios (Ubicación, Internet o Audio) en el Manifiesto. Esto permite que el sistema gestione los permisos de forma centralizada, facilitando la administración en entornos controlados.
 
 ### RA7.g Desinstalación
 **Justificación:**
 Se configuran las reglas de copia de seguridad (`backup_rules`) en el Manifiesto. Esto asegura que, en caso de desinstalación y reinstalación (o cambio de dispositivo), los datos de usuario se gestionen correctamente según la política definida, permitiendo una limpieza o restauración adecuada.
 
-*Evidencia (AndroidManifest.xml):*
-[🔗 Código aquí]
-
 ### RA7.h Canales distribución
 **Justificación:**
 El control de versiones está explícitamente definido mediante `versionName` y `versionCode`. Esto es fundamental para gestionar los canales de distribución (alfa, beta, producción), ya que las tiendas de aplicaciones y el sistema operativo utilizan estos valores para detectar y aplicar actualizaciones.
-
-*Evidencia (build.gradle):*
-[🔗 Código aquí]
 
 ---
 
@@ -346,47 +325,37 @@ El control de versiones está explícitamente definido mediante `versionName` y 
 **Justificación:**
 Se ha definido una estrategia de pruebas integral que abarca diferentes niveles de abstracción. Se incluyen dependencias para pruebas unitarias (`JUnit`) para la lógica pura, y pruebas instrumentadas (`Espresso/ComposeTest`) para validar la interacción de la UI y la base de datos en el dispositivo.
 
-*Evidencia (build.gradle):*
-[🔗 Código aquí]
-
 ### RA8.b Pruebas de integración
 **Justificación:**
 Se han implementado pruebas de integración específicas para la capa de persistencia. El test `escribirUsuarioYLeerlo` verifica que el DAO interactúa correctamente con la base de datos Room, confirmando que los datos se escriben en disco y se pueden recuperar, validando la integración del sistema.
 
-*Evidencia (AccesoDaoTest.kt):*
-[🔗 Código aquí]
+https://github.com/juanma-ge/Relief/blob/ddfdb4215867368f09eb6e6c658b13c4e2f2fa41/app/src/androidTest/java/com/alberti/relief/AccesoDaoTest.kt#L40-L42
 
 ### RA8.c Pruebas de regresión
 **Justificación:**
 Las pruebas automatizadas actúan como una red de seguridad contra regresiones. Al verificar aserciones específicas (como que el correo recuperado sea igual al insertado), se garantiza que futuros cambios en el código no rompan la funcionalidad de persistencia ya existente.
 
-*Evidencia (AccesoDaoTest.kt):*
-[🔗 Código aquí]
-
 ### RA8.d Pruebas de volumen/estrés
 **Justificación:**
 Se ha diseñado una prueba de estrés (`pruebaDeCargaMasiva`) que somete a la base de datos a una carga de trabajo intensa (1000 inserciones consecutivas). Esta prueba mide el tiempo de ejecución para asegurar que la aplicación mantiene su rendimiento y estabilidad incluso bajo condiciones extremas de uso.
 
-*Evidencia (AccesoDaoTest.kt):*
-[🔗 Código aquí]
+https://github.com/juanma-ge/Relief/blob/ddfdb4215867368f09eb6e6c658b13c4e2f2fa41/app/src/androidTest/java/com/alberti/relief/AccesoDaoTest.kt#L52-L60
 
 ### RA8.e Pruebas de seguridad
 **Justificación:**
 Se han creado pruebas unitarias (`LoginValidationTest`) dedicadas a validar la lógica de seguridad. Estas pruebas verifican que el sistema rechaza correctamente contraseñas cortas o correos mal formados, asegurando que las reglas de negocio de seguridad se cumplen antes de permitir el acceso.
 
-*Evidencia (LoginValidationTest.kt):*
-[🔗 Código aquí]
+https://github.com/juanma-ge/Relief/blob/ddfdb4215867368f09eb6e6c658b13c4e2f2fa41/app/src/test/java/com/alberti/relief/LoginValidationTest.kt#L24-L28
 
 ### RA8.f Uso de recursos
 **Justificación:**
 El código de pruebas demuestra una gestión responsable de los recursos del sistema. Se utiliza la anotación `@After` para cerrar la conexión a la base de datos después de cada prueba, evitando fugas de memoria y asegurando que el entorno de pruebas se mantiene limpio y eficiente.
 
-*Evidencia (AccesoDaoTest.kt):*
-[🔗 Código aquí]
+https://github.com/juanma-ge/Relief/blob/ddfdb4215867368f09eb6e6c658b13c4e2f2fa41/app/src/androidTest/java/com/alberti/relief/AccesoDaoTest.kt#L34-L38
 
 ### RA8.g Documentación pruebas
 **Justificación:**
 Las pruebas están documentadas mediante el uso de nombres de funciones largos y descriptivos (`escribirUsuarioYLeerlo`, `pruebaDeCargaMasiva`). Esto permite que cualquier desarrollador entienda inmediatamente el objetivo de la prueba y el escenario que se está validando sin necesidad de leer el cuerpo del código.
 
-*Evidencia (AccesoDaoTest.kt):*
-[🔗 Código aquí]
+https://github.com/juanma-ge/Relief/blob/ddfdb4215867368f09eb6e6c658b13c4e2f2fa41/app/src/androidTest/java/com/alberti/relief/AccesoDaoTest.kt#L53
+
