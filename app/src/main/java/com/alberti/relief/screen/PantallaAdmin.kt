@@ -49,6 +49,21 @@ import androidx.navigation.NavHostController
 import com.alberti.relief.data.local.AccesoEntity
 import com.alberti.relief.data.local.AppDatabase
 
+/**
+ * Pantalla de Administración y Auditoría.
+ *
+ * Propósito:
+ * Visualizar el historial de accesos (logs) almacenados en la base de datos local.
+ * Esta pantalla está diseñada para ser accesible únicamente por usuarios con rol ADMIN.
+ *
+ * Funcionalidades clave:
+ * - Listado de accesos recuperados de [AccesoDao].
+ * - Filtrado dinámico por tipo de usuario (Todos, Admin, Usuario) mediante [FilterChip].
+ * - Visualización gráfica simple (Gráfico de barras) de la proporción de usuarios.
+ * - Exportación de datos: Genera un informe de texto y lo comparte mediante Intent.
+ *
+ * @param navController Controlador para gestionar el botón de retroceso.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PantallaAdmin(navController: NavHostController) {

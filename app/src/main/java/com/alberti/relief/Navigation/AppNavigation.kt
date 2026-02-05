@@ -74,6 +74,21 @@ import com.alberti.relief.screen.PantallaEmergencia
 import com.alberti.relief.screen.PantallaLogin
 import com.alberti.relief.screen.PantallaPrincipal
 
+/**
+ * Gestor de navegación principal de la aplicación.
+ *
+ * Propósito:
+ * Define el grafo de navegación (NavGraph) y gestiona las transiciones entre pantallas.
+ * Utiliza [NavHost] para intercambiar los composables según la ruta actual.
+ *
+ * Rutas definidas:
+ * - "Login": Pantalla inicial de autenticación.
+ * - "Principal/{rol}": Pantalla principal que recibe el ROL como argumento dinámico.
+ * - "PantallaAdmin": Panel de auditoría (acceso restringido por lógica de negocio).
+ * - "PantallaEmergencia": Acceso rápido a teléfonos de socorro.
+ *
+ * @see NavHostController
+ */
 @Composable
 fun AppNavigation(){
     val navController = rememberNavController()

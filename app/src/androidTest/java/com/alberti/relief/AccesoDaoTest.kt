@@ -16,6 +16,21 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
 
+/**
+ * Suite de pruebas instrumentadas para la capa de persistencia de datos (Room Database).
+ *
+ * Propósito:
+ * Verificar que las operaciones CRUD (Crear, Leer) contra la base de datos local
+ * funcionan correctamente en un entorno Android simulado.
+ *
+ * Características de la prueba:
+ * - Utiliza una base de datos en memoria (inMemoryDatabaseBuilder) para no persistir basura.
+ * - Verifica la integridad de los datos insertados.
+ * - Incluye una prueba de estrés (carga masiva) para asegurar el rendimiento.
+ *
+ * @see AccesoDao
+ * @see AppDatabase
+ */
 @RunWith(AndroidJUnit4::class)
 class AccesoDaoTest {
 

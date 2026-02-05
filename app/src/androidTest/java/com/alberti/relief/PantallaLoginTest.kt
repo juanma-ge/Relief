@@ -8,6 +8,23 @@ import com.alberti.relief.screen.PantallaLogin
 import org.junit.Rule
 import org.junit.Test
 
+/**
+ * Pruebas de Interfaz de Usuario (UI) para la pantalla de Login.
+ *
+ * Propósito:
+ * Asegurar que los componentes visuales críticos son renderizados correctamente
+ * y son visibles para el usuario final.
+ *
+ * Herramientas:
+ * Utiliza [ComposeTestRule] para acceder al árbol de nodos de la interfaz declarativa.
+ *
+ * Escenarios cubiertos:
+ * - Visibilidad del título y subtítulo de la app.
+ * - Existencia de los campos de entrada (Correo, Contraseña).
+ * - Visibilidad del botón de acción principal.
+ *
+ * @see com.alberti.relief.screen.PantallaLogin
+ */
 class PantallaLoginTest {
 
     @get:Rule

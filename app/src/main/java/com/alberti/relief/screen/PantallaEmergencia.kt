@@ -30,7 +30,21 @@ import androidx.compose.material.icons.filled.MedicalServices
 import androidx.compose.ui.input.pointer.pointerInput
 import com.alberti.relief.components.BotonEmergencia
 
-
+/**
+ * Pantalla de Servicios de Emergencia.
+ *
+ * Propósito:
+ * Proporcionar una interfaz limpia y rápida para contactar con servicios de socorro
+ * en situaciones críticas.
+ *
+ * Características de Seguridad:
+ * - Botón SOS (112): Implementa un gesto de "Pulsación Larga" (Long Press) para
+ * evitar llamadas accidentales por toques involuntarios.
+ * - Accesos directos: Botones para Policía, Bomberos y Ambulancia.
+ *
+ * Interactividad:
+ * Lanza un [Intent.ACTION_DIAL] que abre el marcador telefónico con el número precargado.
+ */
 @Composable
 fun PantallaEmergencia(navController: NavHostController) {
     val context = LocalContext.current

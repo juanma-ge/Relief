@@ -20,6 +20,21 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.graphics.vector.ImageVector
 
+/**
+ * Componente UI reutilizable para botones de llamada de emergencia.
+ *
+ * Propósito:
+ * Encapsular el diseño visual y la lógica de llamada telefónica para mantener
+ * el código de las pantallas limpio y consistente.
+ *
+ * Comportamiento:
+ * Al hacer clic, genera un Intent implícito [Intent.ACTION_DIAL] con el número proporcionado.
+ *
+ * @param text Etiqueta del botón (ej: "POLICÍA").
+ * @param icon Icono vectorial descriptivo.
+ * @param color Color de fondo del botón para distinguir la urgencia.
+ * @param numero Número de teléfono al que se llamará.
+ */
 @Composable
 fun BotonEmergencia(text: String, icon: ImageVector, color: Color, numero: String) {
     val context = LocalContext.current

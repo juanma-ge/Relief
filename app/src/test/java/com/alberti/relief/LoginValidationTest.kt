@@ -3,6 +3,21 @@ package com.alberti.relief
 import org.junit.Test
 import org.junit.Assert.*
 
+/**
+ * Pruebas Unitarias Locales (Local Unit Tests) para la lógica de negocio.
+ *
+ * Propósito:
+ * Validar algoritmos puros y reglas de negocio sin depender del framework de Android
+ * ni de un emulador. Estas pruebas son rápidas y se ejecutan en la JVM local.
+ *
+ * Reglas de negocio validadas:
+ * - Formato de correo electrónico (debe contener '@').
+ * - Seguridad de contraseña (longitud mínima requerida).
+ *
+ * Tipos de prueba:
+ * - Happy Path (Camino feliz/caso correcto).
+ * - Casos de borde/error (entradas inválidas).
+ */
 class LoginValidationTest {
 
     private fun esLoginValido(correo: String, pass: String): Boolean {
