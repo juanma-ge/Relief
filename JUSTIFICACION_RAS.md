@@ -356,8 +356,7 @@ https://github.com/juanma-ge/Relief/blob/ddfdb4215867368f09eb6e6c658b13c4e2f2fa4
 
 ### RA8.g Documentación pruebas
 **Justificación:**
-Las pruebas están documentadas mediante el uso de nombres de funciones largos y descriptivos (`escribirUsuarioYLeerlo`, `pruebaDeCargaMasiva`). Esto permite que cualquier desarrollador entienda inmediatamente el objetivo de la prueba y el escenario que se está validando sin necesidad de leer el cuerpo del código.
+Las pruebas están documentadas mediante el uso de nombres de funciones largos y descriptivos (`escribirUsuarioYLeerlo`, `pruebaDeCargaMasiva`). Esto permite que cualquier desarrollador entienda inmediatamente el objetivo de la prueba y el escenario que se está validando sin necesidad de leer el cuerpo del código. Además la propia función está documentada para que el usuario entienda el funcionamiento de la prueba.
 
 https://github.com/juanma-ge/Relief/blob/ddfdb4215867368f09eb6e6c658b13c4e2f2fa41/app/src/androidTest/java/com/alberti/relief/AccesoDaoTest.kt#L53
-
-
+https://github.com/juanma-ge/Relief/blob/64947e11fdfd29b167a27d43ffad4df31d370332/app/src/androidTest/java/com/alberti/relief/AccesoDaoTest.kt#L19-L35
