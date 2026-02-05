@@ -4,6 +4,10 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 
+/**
+ * Interfaz de Acceso a Datos (DAO) para la gestión del historial de accesos.
+ * Room generará automáticamente la implementación de esta interfaz.
+ */
 @Dao
 interface AccesoDao {
     @Insert

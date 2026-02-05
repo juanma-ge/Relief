@@ -39,6 +39,12 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 
+/**
+ * Pantalla de inicio de sesión. Gestiona la autenticación básica y la asignación de roles.
+ *
+ * @param navController Controlador de navegación para redirigir tras login exitoso.
+ * @param usuarioCreado Callback que devuelve el objeto Usuario con el rol asignado.
+ */
 @Composable
 fun PantallaLogin(navController: NavHostController, usuarioCreado: (Usuario) -> Unit){
     var correo by remember { mutableStateOf("") }

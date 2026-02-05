@@ -20,6 +20,19 @@ import okhttp3.Request
 import org.json.JSONObject
 import java.util.Locale
 
+
+/**
+ * Realiza una búsqueda de centros médicos (Hospitales y Farmacias) utilizando la API de Google Places.
+ *
+ * Esta función es suspendida para no bloquear el hilo principal (Main Thread).
+ *
+ * @param textoBuscado Nombre del lugar o dirección (si está vacío, usa GPS).
+ * @param fusedClient Cliente de ubicación para obtener coordenadas GPS actuales.
+ * @param resultado Lista mutable observable (SnapshotStateList) que actualizará la UI automáticamente.
+ * @param context Contexto de la aplicación para acceder a recursos y mostrar Toasts.
+ *
+ * @throws SecurityException Si no se han concedido los permisos de ubicación.
+ */
 @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
 suspend fun ejecutarBusquedaUniversal(
     textoBuscado: String,

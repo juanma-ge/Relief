@@ -31,6 +31,12 @@ import com.alberti.relief.utils.ejecutarBusquedaUniversal
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.launch
 
+/**
+ * Pantalla principal de la aplicación.
+ * Contiene la barra de búsqueda, botón de micrófono e integración con Google Maps.
+ *
+ * @param rol Determina si se muestra el icono de "Estadísticas/Admin" en la barra superior.
+ */
 @SuppressLint("MissingPermission")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

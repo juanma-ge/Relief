@@ -69,7 +69,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.alberti.relief.data.Stats
 import com.alberti.relief.screen.PantallaAdmin
 import com.alberti.relief.screen.PantallaEmergencia
 import com.alberti.relief.screen.PantallaLogin
