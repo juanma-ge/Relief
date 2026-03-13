@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.viewbinding.BuildConfig
 import com.alberti.relief.Navigation.AppNavigation
 import com.google.android.libraries.places.api.Places
 
